@@ -20,7 +20,8 @@ struct details {
 		}vtd;
 	}r;
 }d;
-
+///a replica for sizeof (); function
+long int shacord;
 //to be linked to the header file
 
 
@@ -42,14 +43,17 @@ void details ();
 void display();
 void menu ();
 void admin ();
-void sign_up ();
 void logi ();
+void top_tier ();
 
+//tha header files
 #include "sign_login.h"
+#include "top_tier.h"
 //tha main function
 int main ()
 
 {
+    //top_tier ();
 	//calling em functions here
 	landing();
 //	home_page ();
@@ -73,6 +77,7 @@ void home_page ()
 }
 void details ()
 {
+	shacord = sizeof (d);
 int i;
 char next;
 	FILE *cad;
@@ -137,15 +142,15 @@ char next;
 											printf ("Enter Time'HH:MM:SS'");
 										gotoxy(64, 13);
 									scanf ("%s", d.r.vtd.time);
-						
 
-			 fwrite(&d,sizeof(d),1,cad);
+
+			 fwrite(&d,shacord,1,cad);
 			 		for (i=0; i<1;++i)
 								{
 							MessageBox(0, "Your Information Has Been Submitted Sucessfully", "Notification", 0);
 								Sleep (1000);
 								}
-			 
+
 			 	gotoxy (60, 16);
 			 		printf ("Add another candidate (y/n)?");
 			 			gotoxy(64, 17);
@@ -163,6 +168,7 @@ char next;
 		fclose (cad);
 }
 void display(){
+	shacord = sizeof (d);
 		char underScore = 95;
 			int uno;
 	int temp=1;
@@ -173,7 +179,7 @@ void display(){
 				printf ("Error");
 			}
 			home_page();
-			while (fread(&d, sizeof(d),1,cad)==1)
+			while (fread(&d, shacord,1,cad)==1)
 			{
 
 			//	gotoxy(20, 6);
@@ -181,7 +187,7 @@ void display(){
 				printf ("\n");
 				printf ("\nNO  CAN/CODE   AGE     VENUE          TIME      DATE\n");
 				printf ("%d   %s      %d    %s   %s  %.10s\n\n",temp, d.candi_code, d.r.age, d.r.vtd.venue, d.r.vtd.time, d.r.vtd.date);
-					
+
 						for (uno = 0; uno<100; uno ++)
 						{
 							printf ("%c", underScore);
@@ -194,6 +200,7 @@ void display(){
 }
 void overwrite()
 {
+	shacord = sizeof (d);
 	char next;
 	FILE *cad;
 		cad = fopen ("candidate/candidates.txt", "w");
@@ -257,7 +264,7 @@ void overwrite()
 											printf ("Enter Time'HH:MM:SS'");
 										gotoxy(64, 13);
 									scanf ("%s", d.r.vtd.time);
-			 fwrite(&d,sizeof(d),1,cad);
+			 fwrite(&d,shacord,1,cad);
 			 	gotoxy (60, 16);
 			 		printf ("Add another candidate (y/n)?");
 			 			gotoxy(64, 17);
@@ -267,14 +274,6 @@ void overwrite()
 		}
 			}
 		fclose (cad);
-}
-void del()
-{
-
-}
-void edit ()
-{
-
 }
 
 void landing ()
@@ -830,6 +829,56 @@ void menu ()
 					}
 				}
 }
+///////////////////////////////////////////////////////
+void top_tier ()
+
+{
+    char *men [3] = {"1. view registered canditates", "2. delete a registered candidate", "3. Modify candidate record"};
+        int i;
+            char select;
+                    int ex = 60,wy = 15;
+                  
+                    
+                    	system ("cls");
+                         for (i=0;i<3;++i)
+                            {
+                                gotoxy(ex, wy);
+                                printf ("%s", men[i]);
+                                wy+=2;
+                            }
+                        gotoxy(ex, wy);
+                            printf ("> > >");
+                            ex+=6;
+                    gotoxy (ex, wy);
+                        select = getche ();
+					
+					switch (select)
+					{
+						case '1':{
+								system ("cls");
+							topView ();
+							break;
+						}
+						case '2':{
+								system ("cls");
+							topDelete ();
+							break;
+						}
+						case '3':{
+								system ("cls");
+							topModify ();
+							break;
+						}
+						default :{
+								system ("cls");
+						gotoxy(ex, wy);
+							printf ("Invalid Entry");
+								system ("cls");
+									landing ();
+							break;
+						}
+					}
+}
 //////////*******************************////////
 void admin ()
 {
@@ -843,4 +892,5 @@ void admin ()
 void logi ()
 {
 	login ();
+		top_tier ();
 }
