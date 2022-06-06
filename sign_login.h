@@ -14,131 +14,75 @@ long int rec;
 
 void sign()
 {
-
+		char s = 205;
+			char down = 186;
+				char rtc = 187;
+				char rbc = 188;
+			char ltc = 201;
+		char lbc = 200;
+			int t;
+				int ex = 55, ey =4;
 	while (1){
 		system ("color 02");
-
-gotoxy (55, 4);
-printf ("_______________________________________________________");
-
-gotoxy (55, 25);
-printf ("_______________________________________________________");
-
+				
+			gotoxy (54,4);
+				printf ("%c", ltc);
+			
+				for (t=0;t<55;++t)
+				{
+					gotoxy (ex, ey);
+						printf ("%c", s);
+					ex+=1;
+					if (t==54)
+					{
+						gotoxy (ex, ey);
+							printf ("%c", rtc);
+					}
+				}
+				ex =55, ey =25;
+			gotoxy (54,25);
+				printf ("%c", lbc);
+				for (t=0;t<55;++t)
+				{
+					gotoxy (ex, ey);
+						printf ("%c", s);
+					ex+=1;
+				}
+					/// header											
 	gotoxy (70, 4);
 	printf ("SIGN UP");
-			//log in deoc
-		//left margin
-		gotoxy (54, 5);
-		printf ("|");
-		gotoxy (54, 6);
-		printf ("|");
-		gotoxy (54, 7);
-		printf ("|");
-
-		gotoxy (54, 8);
-		printf ("|");
-		gotoxy (54, 9);
-		printf ("|");
-		gotoxy (54, 10);
-		printf ("|");
-
-		gotoxy (54, 11);
-		printf ("|");
-		gotoxy (54, 12);
-		printf ("|");
-		gotoxy (54, 13);
-		printf ("|");
-
-		gotoxy (54, 14);
-		printf ("|");
-		gotoxy (54, 15);
-		printf ("|");
-		gotoxy (54, 16);
-		printf ("|");
-
-		gotoxy (54, 17);
-		printf ("|");
-		gotoxy (54, 18);
-		printf ("|");
-		gotoxy (54, 19);
-		printf ("|");
-
-		gotoxy (54, 20);
-		printf ("|");
-		gotoxy (54, 21);
-		printf ("|");
-		gotoxy (54, 22);
-		printf ("|");
-
-		gotoxy (54, 23);
-		printf ("|");
-		gotoxy (54, 24);
-		printf ("|");
-		gotoxy (54, 25);
-		printf ("|");
-
-
-													//right margin
-													gotoxy (110, 5);
-													printf ("|");
-													gotoxy (110, 6);
-													printf ("|");
-													gotoxy (110, 7);
-													printf ("|");
-
-													gotoxy (110, 8);
-													printf ("|");
-													gotoxy (110, 9);
-													printf ("|");
-													gotoxy (110, 10);
-													printf ("|");
-
-													gotoxy (110, 11);
-													printf ("|");
-													gotoxy (110, 12);
-													printf ("|");
-													gotoxy (110, 13);
-													printf ("|");
-
-													gotoxy (110, 14);
-													printf ("|");
-													gotoxy (110, 15);
-													printf ("|");
-													gotoxy (110, 16);
-													printf ("|");
-
-													gotoxy (110, 17);
-													printf ("|");
-													gotoxy (110, 18);
-													printf ("|");
-													gotoxy (110, 19);
-													printf ("|");
-
-													gotoxy (110, 20);
-													printf ("|");
-													gotoxy (110, 21);
-													printf ("|");
-													gotoxy (110, 22);
-													printf ("|");
-
-													gotoxy (110, 23);
-													printf ("|");
-													gotoxy (110, 24);
-													printf ("|");
-													gotoxy (110, 25);
-
+												ex = 54, ey =5;
+												for (t=0;t<20;++t)
+												{
+													gotoxy (ex, ey);
+														 printf ("%c", down);
+													ey +=1;
+													if (t==19){
+														gotoxy (110, 25);
+															printf ("%c", rbc);
+													}
+												}
+												
+											ex = 110, ey =24;
+											for (t=0;t<20;++t)
+											{
+												gotoxy (ex, ey);
+													printf ("%c", down);
+												ey-=1;
+											}
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 FILE *fp;	
 
 rec=sizeof (si);
-	fp = fopen ("admin/admins.txt", "w");
+	fp = fopen ("admin/admins.txt", "ab+");
 	if (fp == NULL)
 	{
 		printf ("error");
 	}
 	
 	else {
+			fflush (stdin);
 			gotoxy (70, 10);
 			printf ("ENTER USER NAME");
 
@@ -153,14 +97,14 @@ rec=sizeof (si);
 				printf ("ENTER PASSWORD");
 
 			gotoxy (73, 12);
-			scanf( "%s", si.username_main);
+				gets (si.username_main);
 														
-				gotoxy (73, 17);
-				scanf ("%s", si.password_main);
+			gotoxy (73, 17);
+				gets (si.password_main);
 
 				gotoxy (70, 20);
 				printf ("Saving :");
-
+ 
 //variables
 int i;
 char b=219;
@@ -174,7 +118,7 @@ char b=219;
 			
 					Sleep(250);
 						}
-		fwrite (&si,rec,1,fp);	
+		fwrite (&si,sizeof (si),1,fp);	
 	MessageBox(0,"Saved Successfully", "Saving",0);
 	}
 	fclose (fp);
@@ -188,15 +132,6 @@ char b=219;
 					{
 						break;
 					}
-
-
-
-
-
-
-gotoxy (55, 25);
-printf ("_______________________________________________________");
-
 }
 system ("cls");
 }
@@ -204,127 +139,66 @@ system ("cls");
 
 void login()
 {
-	
+		char s = 205;
+			char down = 186;
+				char rtc = 187;
+				char rbc = 188;
+			char ltc = 201;
+		char lbc = 200;
+		
+			int t;
+				int ex = 55, ey =4;
 	while (1){
 		system ("color 02");
-
-gotoxy (55, 4);
-printf ("_______________________________________________________");
-
-gotoxy (55, 25);
-printf ("_______________________________________________________");
-
+		gotoxy (54,4);
+				printf ("%c", ltc);
+			
+				for (t=0;t<55;++t)
+				{
+					gotoxy (ex, ey);
+						printf ("%c", s);
+					ex+=1;
+					if (t==54)
+					{
+						gotoxy (ex, ey);
+							printf ("%c", rtc);
+					}
+				}
+				ex =55, ey =25;
+			gotoxy (54,25);
+				printf ("%c", lbc);
+				for (t=0;t<55;++t)
+				{
+					gotoxy (ex, ey);
+						printf ("%c", s);
+					ex+=1;
+				}
+	/// title		
 	gotoxy (70, 4);
-	printf ("Welcome to Shadowy Hands");
-			//log in deoc
-		//left margin
-		gotoxy (54, 5);
-		printf ("|");
-		gotoxy (54, 6);
-		printf ("|");
-		gotoxy (54, 7);
-		printf ("|");
-
-		gotoxy (54, 8);
-		printf ("|");
-		gotoxy (54, 9);
-		printf ("|");
-		gotoxy (54, 10);
-		printf ("|");
-
-		gotoxy (54, 11);
-		printf ("|");
-		gotoxy (54, 12);
-		printf ("|");
-		gotoxy (54, 13);
-		printf ("|");
-
-		gotoxy (54, 14);
-		printf ("|");
-		gotoxy (54, 15);
-		printf ("|");
-		gotoxy (54, 16);
-		printf ("|");
-
-		gotoxy (54, 17);
-		printf ("|");
-		gotoxy (54, 18);
-		printf ("|");
-		gotoxy (54, 19);
-		printf ("|");
-
-		gotoxy (54, 20);
-		printf ("|");
-		gotoxy (54, 21);
-		printf ("|");
-		gotoxy (54, 22);
-		printf ("|");
-
-		gotoxy (54, 23);
-		printf ("|");
-		gotoxy (54, 24);
-		printf ("|");
-		gotoxy (54, 25);
-		printf ("|");
-
-
-													//right margin
-													gotoxy (110, 5);
-													printf ("|");
-													gotoxy (110, 6);
-													printf ("|");
-													gotoxy (110, 7);
-													printf ("|");
-
-													gotoxy (110, 8);
-													printf ("|");
-													gotoxy (110, 9);
-													printf ("|");
-													gotoxy (110, 10);
-													printf ("|");
-
-													gotoxy (110, 11);
-													printf ("|");
-													gotoxy (110, 12);
-													printf ("|");
-													gotoxy (110, 13);
-													printf ("|");
-
-													gotoxy (110, 14);
-													printf ("|");
-													gotoxy (110, 15);
-													printf ("|");
-													gotoxy (110, 16);
-													printf ("|");
-
-													gotoxy (110, 17);
-													printf ("|");
-													gotoxy (110, 18);
-													printf ("|");
-													gotoxy (110, 19);
-													printf ("|");
-
-													gotoxy (110, 20);
-													printf ("|");
-													gotoxy (110, 21);
-													printf ("|");
-													gotoxy (110, 22);
-													printf ("|");
-
-													gotoxy (110, 23);
-													printf ("|");
-													gotoxy (110, 24);
-													printf ("|");
-													gotoxy (110, 25);
-													printf ("|");
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////INITIALISING FILES//////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-
+	printf ("Log In");
+							
+											ex = 54, ey =5;
+												for (t=0;t<20;++t)
+												{
+													gotoxy (ex, ey);
+														 printf ("%c", down);
+													ey +=1;
+													if (t==19){
+														gotoxy (110, 25);
+															printf ("%c", rbc);
+													}
+												}
+												
+											ex = 110, ey =24;
+											for (t=0;t<20;++t)
+											{
+												gotoxy (ex, ey);
+													printf ("%c", down);
+												ey-=1;
+											}
 rec = sizeof (si);
 FILE *fp;
-	fp = fopen ("admin/admins.txt", "r");
+	fp = fopen ("admin/admins.txt", "rb");
 		if (fp == NULL)
 		{
 				MessageBox (0, "Error 404", "Error", 0);		
@@ -334,84 +208,71 @@ FILE *fp;
 		{
 			gotoxy (70, 10);
 			printf ("Enter User Name");
-
 				gotoxy (70, 15);
 				printf ("Enter Password");
-
 			gotoxy (70, 12);
 			scanf ("%s", si.lo.username);
-
-
 				gotoxy (70, 17);
-				scanf ("%s", si.lo.password);
-				
-																					//comparing credentials
-																				//comparing credentials																			
-
-																					if (strcmp (si.lo.password, si.password_main)==0 && strcmp (si.lo.username, si.username_main)==0)
-																							{
-															                                        gotoxy (70, 21);
-															                                        printf ("Please Wait ");
-
-                                     														   //Loop de loop varibales
-
-    char z = 219;
-	 int y;																					   //Loop de loop varibales
-	 
-																                                                gotoxy (81, 21);
-																                                                for (y=0; y<10; y++)
-																                                                {
-																                                                    printf ("%c", z);
-																
-																                                                    Sleep (250);
-																                                                }
-																                                    gotoxy (70, 20);
-																										printf ("Log in successful!!");
-																									gotoxy (65, 21);
-																									printf ("Press any key to continue");
-																										system ("cls");
-																							}
-
-							else
+				scanf ("%s", si.lo.password);																		
+			
+			if (strcmp (si.lo.password, si.password_main)==0 && strcmp (si.lo.username, si.username_main)==0)
+				{
+					gotoxy (70, 21);
+						printf ("Please Wait ");
+                        //Loop de loop varibales
+   							 char z = 219;
+	 							int y;																					 
+						  //Loop de loop varibales
+						    gotoxy (81, 21);
+						for (y=0; y<10; y++)
 							{
-                                              gotoxy (70, 21);
-                                        printf ("Please Wait ");
+								printf ("%c", z);
+								Sleep (300);
+							}
+								gotoxy (70, 20);
+									printf ("Log in successful!!");
+								gotoxy (65, 21);
+									printf ("Press any key to continue");
+								gotoxy(70, 22);
+									getche ();
+										if (getche)
+											{
+												system ("cls");
+													gotoxy(0,0);
+													top_tier ();
+											}
+																										
+				}
 
-                                        //Loop de loop varibales
-
-                                        char z = 46;
-                                        int y;
-                                                gotoxy (81, 21);
-                                                for (y=0; y<10; y++)
-                                                {
-                                                    printf ("%c", z);
-
-                                                    Sleep (250);
-                                                }
-
+			else
+				{
+                    gotoxy (70, 21);
+                        printf ("Please Wait ");
+							//Loop de loop varibales
+								char z = 46;
+                                    int y;
+                            //Loop de loop varibales
+                                gotoxy (81, 21);
+                                	for (y=0; y<10; y++)
+                                        {
+                                        	printf ("%c", z);
+											Sleep (250);
+                                    	}
 								gotoxy(70, 21);
 								printf ("Credentials don't match!!!!");
-							} 
+				} 
 	}
 	fclose (fp);
 														
-								gotoxy(70, 22);
-
-								getche ();
-								if (getche)
+					gotoxy(70, 22);
+						getche ();
+							if (getche)
 								{
-									exit (0);
+									system ("cls");
+									menu ();
 								}
-							}
-
-
-
-
-
-
-gotoxy (55, 25);
-printf ("_______________________________________________________");
-
+							
+}
 }
 
 

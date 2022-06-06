@@ -3,26 +3,53 @@
 #include <windows.h>
 #include <string.h>
 #include <conio.h>
+#include <time.h>
 
-
+//Shadowy 
+//024 OP comrade of all times
+#define bar 219
 //a structure containing all the varibles for candidate input details
-struct details {
-	char name [20], surname [20], citizen_code [20], candi_code [20];
+struct details
+{
+	char name [20], surname [20];
+	char code [7-1];
 	int phone;
-	struct resident{
+	struct resident
+	{
 		char district [20];
 		char area [10];
 		int age;
-		struct venue_time_date{
+		struct venue_time_date
+		{
 			char venue [20];
-			char date  [10];
-			char time  [10];
+			
+			struct doctor_lab_details
+				{
+					char FullName [30];
+					char vstatus  [10];
+					char vresult  [15];
+					char psex	  [10];
+					char sign	  [10];
+					char date	  [10];
+					char time	  [10];
+					char lab	  [20];
+					char district [20];
+					
+				}l;
+			
 		}vtd;
 	}r;
+	
 }d;
 ///a replica for sizeof (); function
-long int shacord;
+long int store;
 //to be linked to the header file
+
+///////////////////////////////
+
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////
 
 
 //surfing through the console plane
@@ -35,10 +62,11 @@ void gotoxy (int x, int y)
 }
 
 
+		
+
 //all my function are here
 void home_page ();
 void landing();
-void overwrite();
 void details ();
 void display();
 void menu ();
@@ -49,10 +77,19 @@ void top_tier ();
 //tha header files
 #include "sign_login.h"
 #include "top_tier.h"
+#include "start.h"
+#include "form.h"
+
 //tha main function
 int main ()
 
 {
+	 display ();
+	//form_gen ();
+		//sign ();
+	//	topView ();
+	//	details ();
+	//	start_all ();
     //top_tier ();
 	//calling em functions here
 	landing();
@@ -62,8 +99,6 @@ int main ()
 			//	display();
 			//menu();
 		//	sign_up ();
-
-
 	return 0;
 }
 void home_page ()
@@ -71,209 +106,221 @@ void home_page ()
 	gotoxy (55, 2);
 		printf ("Cybernesia 22  Vaccination Registration");
 	gotoxy (40, 3);
-		printf ("You have taken a right step in coming here for vaccine registration");
+		printf ("You have etaken a right step in coming here for vaccine registration");
 	gotoxy (49, 4);
 		printf ("*Please Fill In Your details in the Spaces Below*");
+	gotoxy (55, 5);
+		printf ("*Take a Photo of Your Code Please*");
 }
 void details ()
 {
-	shacord = sizeof (d);
-int i;
-char next;
-	FILE *cad;
-		cad = fopen ("candidate/candidates.txt", "a");
-			if (cad == NULL)
+		char code_check [6];
+	system ("cls");
+	home_page ();
+	FILE *opi;
+		opi = fopen ("candidate/candidates.txt", "ab+");
+			if (opi == NULL)
 			{
-				printf ("Error");
+				system ("cls");
+					MessageBox(0,"FILE NOT FOUND","ERROR!",0);
 			}
 			else
 			{
-		next = 'y';
-			while (next == 'y')
-			{
-				system ("cls");
-			home_page ();
-				gotoxy(60, 6);
-			fseek(cad,0,SEEK_END);
-					printf ("Enter Candidate Name");
-						gotoxy (64, 7);
-							scanf ("%s", d.name);
-								gotoxy(60, 9);
-									printf ("Enter Candidate Surname");
-										gotoxy(64, 10);
-											scanf ("%s", d.surname);
-										gotoxy (60, 12);
-											printf ("Enter Candidate Phone Number");
-								gotoxy (64, 13);
-									scanf ("%d", &d.phone);
-						gotoxy(60, 15);
-							printf ("Enter Candidate Citizen Code");
-					gotoxy(64, 16);
-						scanf ("%s", d.citizen_code);
-				gotoxy (60, 18);
-					printf ("Enter Candidate Code");
-						gotoxy(64, 19);
-							scanf ("%s", d.candi_code);
-								system ("cls");
-										home_page ();
-									gotoxy(60, 6);
+				fflush (stdin);
+					gotoxy (60, 7);
+						printf ("Enter First Name");
+					gotoxy (62,8);
+						gets(d.name);
+							gotoxy (60, 10);
+								printf ("Enter Surname");
+							gotoxy (62, 11);
+								gets (d.surname);
+									gotoxy (60, 13);
 										printf ("Enter District");
-											gotoxy(64, 7);
-												scanf ("%s", d.r.district);
-											gotoxy(60, 9);
+									gotoxy (62, 14);
+										gets (d.r.district);
+											gotoxy (60, 16);
+												printf ("Enter Venue");
+											gotoxy (62, 17);
+												gets (d.r.vtd.venue);
+													system ("cls");
+														home_page ();
+											gotoxy (60, 7);
 												printf ("Enter Area");
-										gotoxy(64, 11);
-									scanf ("%s",d.r.area);
-								gotoxy(60, 13);
-							printf ("Enter Your Age");
-						gotoxy(64, 14);
-					scanf ("%d", &d.r.age);
-				system ("cls");
-					home_page();
-						gotoxy (60, 6);
-							printf ("Enter Venue");
-								gotoxy(64, 7);
-									scanf ("%s", d.r.vtd.venue);
-										gotoxy(60, 9);
-											printf ("Enter Date 'DD:MM:YYY' ");
-												gotoxy(64, 10);
-													scanf ("%s", d.r.vtd.date);
-												gotoxy(60, 12);
-											printf ("Enter Time'HH:MM:SS'");
-										gotoxy(64, 13);
-									scanf ("%s", d.r.vtd.time);
-
-
-			 fwrite(&d,shacord,1,cad);
-			 		for (i=0; i<1;++i)
+											gotoxy (62, 8);
+												gets (d.r.area);
+									gotoxy (60, 10);
+										printf ("Enter Phone Number");
+									gotoxy (62, 11);
+										scanf ("%d", &d.phone);
+							gotoxy (60, 13);
+								printf ("Enter Age");
+							gotoxy (62, 14);
+								scanf ("%d", &d.r.age);
+								if (d.r.age <12)
 								{
-							MessageBox(0, "Your Information Has Been Submitted Sucessfully", "Notification", 0);
-								Sleep (1000);
+									system ("cls");
+										MessageBox (0,"Sorry Only 12 and Above can\nregister", "\tFailed to register", 0);
+											exit (0);
 								}
-
-			 	gotoxy (60, 16);
-			 		printf ("Add another candidate (y/n)?");
-			 			gotoxy(64, 17);
-			 				fflush(stdin);
-			 					next = getche ();
-
-			 					if (next != 'y')
-			 					{
-			 						system ("cls");
-			 						landing ();
-								 }
-		}
-
+	///////////////////GENERATION OF A SPECIAL CODE FOR ALL CANDIDATES/////////////////////////////////////
+		srand (time(NULL));
+			char alphaCollection [] = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
+				int e;
+					int ex = 65, ey= 7;
+						
+						
+						system ("cls");
+							home_page ();
+					gotoxy (45, 7);
+							printf ("Your Reg Code is >> ");
+							
+					for (e=0; e < 6; ++ e)
+					{
+						d.code[e] = alphaCollection [rand () % strlen (alphaCollection)];
+								gotoxy (ex, ey);
+							printf ("%c", d.code[e]);
+								Sleep (100);
+									ex+=1;
+					}
+						getche ();
+							system ("cls");
+								gotoxy (60, 7);
+									printf ("Enter Your Code Here");
+								gotoxy (62, 8);
+										fflush (stdin);
+									gets (code_check);
+									
+									if (strcmp (code_check, d.code)==0)
+									{
+											fwrite (&d, sizeof (d), 1, opi);
+											MessageBox(0,"SUBMITTED SUCCESSFULLY", "\tNOTIFICATION",0);
+												landing ();
+									}	
+									
+									if (strcmp (code_check, d.code)!=0)
+									{
+										MessageBox(0, "Code doesn't Match\nEnter Your Details Correctly", "ERROR",0);
+											landing ();
+									}
+										
 			}
-		fclose (cad);
+	fclose (opi);
 }
 void display(){
-	shacord = sizeof (d);
-		char underScore = 95;
-			int uno;
-	int temp=1;
+	
+		char underScore = 95, GenCode [6];
+		int temp=1, check_var=0, uno, j;
+	
+		char s = 205;
+			char down = 186;
+				char rtc = 187;
+				char rbc = 188;
+			char ltc = 201;
+		char lbc = 200;
+					gotoxy (30, 9);
+			printf ("*Enter Your Regestration Code Below To View Your CyberNesia Vaccine Form*");
+					
+							int fex = 53, fey=15;
+						for (j=0; j<25;++j)
+						{
+								gotoxy (fex, fey);
+							printf ("%c", s);
+								fex+=1;
+						}
+							fex = 53, fey = 18;
+						for (j=0; j<25;++j)
+						{
+								gotoxy (fex, fey);
+							printf ("%c", s);
+								fex+=1;
+						}
+							gotoxy (52, 15);
+								printf ("%c", ltc);
+							gotoxy (52, 18);
+								printf ("%c", lbc);
+							gotoxy (78, 15);	
+								printf ("%c", rtc);
+							gotoxy (78, 18);
+								printf ("%c", rbc);
+			
+					gotoxy (58, 16);
+						fflush (stdin);
+						gets (GenCode);
+		
 	FILE *cad;
-		cad = fopen ("candidate/candidates.txt", "r");
-			if (cad == NULL)
+		cad = fopen ("candidate/candidates.txt", "rb");
+			while (fread(&d, sizeof(d),1,cad)==1)
 			{
-				printf ("Error");
-			}
-			home_page();
-			while (fread(&d, shacord,1,cad)==1)
-			{
-
+					if (strcmp (GenCode, d.code)==0)
+					{
+						check_var=1;
+							break;
+					}
 			//	gotoxy(20, 6);
 			//printf ("*Make Sure to Take a ScreenShot of your receipt*");
-				printf ("\n");
-				printf ("\nNO  CAN/CODE   AGE     VENUE          TIME      DATE\n");
-				printf ("%d   %s      %d    %s   %s  %.10s\n\n",temp, d.candi_code, d.r.age, d.r.vtd.venue, d.r.vtd.time, d.r.vtd.date);
-
-						for (uno = 0; uno<100; uno ++)
-						{
-							printf ("%c", underScore);
-						}
-				temp +=1;
-				getch ();
+			}
+			if (check_var==1)
+			{
+					system ("cls");	
+					form_gen ();
+						gotoxy (32, 8);
+				printf ("NAME      : %s", d.name);
+						gotoxy (70, 8);
+				printf ("SURNAME      : %s", d.surname);
+						gotoxy (32, 11);
+				printf ("AGE       : %d", d.r.age);
+						gotoxy (70, 11);
+				printf ("PHONE NUMBER : %d", d.phone);
+						gotoxy (32, 13);
+				printf ("DISTRICT  : %s", d.r.district);
+						gotoxy (70, 13);
+				printf ("AREA         : %s", d.r.area);
+						gotoxy (32, 15);
+				printf ("VENUE     : %s", d.r.vtd.venue);
+						gotoxy (70, 15);
+				printf ("REGCODE      : %s", d.code);
+						//doctors part
+						gotoxy (32, 20);
+				printf ("TESTED BY : %s", d.r.vtd.l.FullName);
+						gotoxy (70, 20);
+				printf ("C/SEX	   : %s", d.r.vtd.l.psex);
+						gotoxy (32, 22);
+				printf ("SIGNATURE : %s", d.r.vtd.l.psex);
+						gotoxy (70, 22);
+				printf ("DATE 	   : %s", d.r.vtd.l.date);
+						gotoxy (32, 24);
+				printf ("TIME 	  : %s", d.r.vtd.l.time);
+						gotoxy (70, 24);
+				printf ("LAB          : %s", d.r.vtd.l.lab);
+						gotoxy (32, 26);
+				printf ("District  : %s", d.r.vtd.l.district);
+						gotoxy (70, 26);
+				printf ("V/STATUS     : %s", d.r.vtd.l.vstatus);
+						gotoxy (45, 30);
+				printf ("V/RESULT  : %s", d.r.vtd.l.vresult);
+						gotoxy (56, 31);
+				printf ("________________");
+				
+				
+				
+				
+					gotoxy (101, 45);
+					getche ();
+						system ("cls");
+							menu ();
+			}
+			else 
+			{
+				MessageBox (0, "Match not Found Try Again", "Error", 0);
+					system ("cls");
+						menu ();
 			}
 
 		fclose (cad);
 }
 void overwrite()
 {
-	shacord = sizeof (d);
-	char next;
-	FILE *cad;
-		cad = fopen ("candidate/candidates.txt", "w");
-			if (cad == NULL)
-			{
-				printf ("Error");
-			}
-			else
-			{
-		next = 'y';
-			while (next == 'y')
-			{
-				system ("cls");
-			home_page ();
-				gotoxy(60, 6);
-			fseek(cad,0,SEEK_END);
-					printf ("Enter Candidate Name");
-						gotoxy (64, 7);
-							scanf ("%s", d.name);
-								gotoxy(60, 9);
-									printf ("Enter Candidate Surname");
-										gotoxy(64, 10);
-											scanf ("%s", d.surname);
-										gotoxy (60, 12);
-											printf ("Enter Candidate Phone Number");
-								gotoxy (64, 13);
-									scanf ("%d", &d.phone);
-						gotoxy(60, 15);
-							printf ("Enter Candidate Citizen Code");
-					gotoxy(64, 16);
-						scanf ("%s", d.citizen_code);
-				gotoxy (60, 18);
-					printf ("Enter Candidate Code");
-						gotoxy(64, 19);
-							scanf ("%s", d.candi_code);
-								system ("cls");
-										home_page ();
-									gotoxy(60, 6);
-										printf ("Enter District");
-											gotoxy(64, 7);
-												scanf ("%s", d.r.district);
-											gotoxy(60, 9);
-												printf ("Enter Area");
-										gotoxy(64, 11);
-									scanf ("%s",d.r.area);
-								gotoxy(60, 13);
-							printf ("Enter Your Age");
-						gotoxy(64, 14);
-					scanf ("%d", &d.r.age);
-				system ("cls");
-					home_page();
-						gotoxy (60, 6);
-							printf ("Enter Venue");
-								gotoxy(64, 7);
-									scanf ("%s", d.r.vtd.venue);
-										gotoxy(60, 9);
-											printf ("Enter Date 'DD:MM:YYY' ");
-												gotoxy(64, 10);
-													scanf ("%s", d.r.vtd.date);
-												gotoxy(60, 12);
-											printf ("Enter Time'HH:MM:SS'");
-										gotoxy(64, 13);
-									scanf ("%s", d.r.vtd.time);
-			 fwrite(&d,shacord,1,cad);
-			 	gotoxy (60, 16);
-			 		printf ("Add another candidate (y/n)?");
-			 			gotoxy(64, 17);
-			 				fflush(stdin);
-			 					next = getche ();
-
-		}
-			}
-		fclose (cad);
 }
 
 void landing ()
@@ -833,9 +880,11 @@ void menu ()
 void top_tier ()
 
 {
+	
+	system ("color 47");
     char *men [3] = {"1. view registered canditates", "2. delete a registered candidate", "3. Modify candidate record"};
         int i;
-            char select;
+            char select, ESC = 27;
                     int ex = 60,wy = 15;
                   
                     
@@ -851,7 +900,12 @@ void top_tier ()
                             ex+=6;
                     gotoxy (ex, wy);
                         select = getche ();
-					
+                        
+						if (select == ESC)
+				{
+					system ("cls");
+						menu ();
+				}
 					switch (select)
 					{
 						case '1':{
@@ -874,10 +928,11 @@ void top_tier ()
 						gotoxy(ex, wy);
 							printf ("Invalid Entry");
 								system ("cls");
-									landing ();
+									top_tier ();
 							break;
 						}
 					}
+			
 }
 //////////*******************************////////
 void admin ()
@@ -894,3 +949,4 @@ void logi ()
 	login ();
 		top_tier ();
 }
+
