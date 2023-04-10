@@ -285,4 +285,145 @@ void topModify ()
 									}
 		fclose (cad);
 						}
+		
+void topLabMod ()
+{
+	int check_var=0, me;
+		char GenCode [6];
+			char option;
+		char s = 205;
+			char down = 186;
+				char rtc = 187;
+				char rbc = 188;
+			char ltc = 201;
+		char lbc = 200;
+	
+	store = sizeof (d);
+			
+					gotoxy (45, 9);
+			printf ("*Enter Candidate Registration Code Below*");
+					
+							int fex = 53, fey=15;
+						for (me=0; me<25;++me)
+						{
+								gotoxy (fex, fey);
+							printf ("%c", s);
+								fex+=1;
+						}
+							fex = 53, fey = 18;
+						for (me=0; me<25;++me)
+						{
+								gotoxy (fex, fey);
+							printf ("%c", s);
+								fex+=1;
+						}
+							gotoxy (52, 15);
+								printf ("%c", ltc);
+							gotoxy (52, 18);
+								printf ("%c", lbc);
+							gotoxy (78, 15);	
+								printf ("%c", rtc);
+							gotoxy (78, 18);
+								printf ("%c", rbc);
+							gotoxy (58, 16);
+							
+						fflush (stdin);
+						gets (GenCode);
+				
+				FILE *cad;
+					cad = fopen ("candidate/candidates.txt", "rb+");
+						
+						while (fread (&d, sizeof (d), 1, cad)==1)
+						{
+							if (strcmp (GenCode, d.code)==0)
+							{
+								system ("cls");
+								home_page ();
+								fflush (stdin);
+					gotoxy (60, 7);
+						printf ("Enter Your Full Name");
+					gotoxy (62,8);
+						gets(d.r.vtd.l.FullName);
+					gotoxy (60, 10);
+						printf ("Enter Candidates Sex");
+					gotoxy (62, 11);
+						gets (d.r.vtd.l.psex);
+					gotoxy (60, 13);
+						printf ("Enter Date");
+					gotoxy (62, 14);
+						gets (d.r.vtd.l.date);
+					gotoxy (60, 16);
+						printf ("Enter Time");
+					gotoxy (62, 17);
+						gets (d.r.vtd.l.time);
+							system ("cls");
+								home_page ();
+					gotoxy (60, 7);
+						printf ("Enter Your Initials");
+					gotoxy (62, 8);
+						gets (d.r.vtd.l.sign);
+					gotoxy (60, 10);
+						printf ("Enter Lab Name");
+					gotoxy (62, 11);
+						gets (d.r.vtd.l.lab);
+					gotoxy (60, 13);
+						printf ("Enter District");
+					gotoxy (62, 14);
+						gets (d.r.vtd.l.district);
+							system ("cls");
+								home_page ();
+					gotoxy (60, 7);
+						printf ("Enter Candidate Vaccination Status");
+					gotoxy (62, 8);
+						gets (d.r.vtd.l.vstatus);
+					gotoxy (60, 10);
+						printf ("Enter test Candidate's Result");
+					gotoxy (62, 11);
+						gets (d.r.vtd.l.vresult);
+						
+					gotoxy (60, 13);
+						printf ("Do you want to send this Information right now?(Y/N)");
+					gotoxy (62, 14);
+						option = getche ();
+						
+						switch (option)
+						{
+							case 'y':{
+								fseek(cad, -store, SEEK_CUR);
+								fwrite (&d, sizeof (d), 1, cad);
+								MessageBox(0,"SUBMITTED SUCCESSFULLY", "\tNOTIFICATION",0);
+								system ("cls");
+								top_tier ();
+								break;
+							}
+							case 'Y':{
+								fseek(cad, -store, SEEK_CUR);
+								fwrite (&d, sizeof (d), 1, cad);
+								MessageBox(0,"SUBMITTED SUCCESSFULLY", "\tNOTIFICATION",0);
+								system ("cls");
+								top_tier ();
+								break;
+							}
+							case 'n':{
+								system ("cls");
+								top_tier ();
+								break;
+							}
+							case 'N':{
+								system ("cls");
+								top_tier ();
+								break;
+							}
+							default :{
+								system ("cls");
+								top_tier ();
+								break;
+							}
+						}
+					
+					}
+				}
+					
+		fclose (cad);
+						}
 

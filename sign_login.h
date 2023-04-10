@@ -1,16 +1,17 @@
-struct sign{
+struct signer{
 	
 	char username_main [30];
 	char password_main [20];
 	
-		struct log {
-			char username [30];
-			char password [20];
-		}lo;	
+		
 }si;
 
 long int rec;
 
+	struct log {
+			char username [30];
+			char password [20];
+		}lo;
 
 void sign()
 {
@@ -73,8 +74,6 @@ void sign()
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 FILE *fp;	
-
-rec=sizeof (si);
 	fp = fopen ("admin/admins.txt", "ab+");
 	if (fp == NULL)
 	{
@@ -88,10 +87,10 @@ rec=sizeof (si);
 
 					//pointer
 					gotoxy (73, 12);
-					printf (">....");
+					printf (">...");
 					//second pointer
 					gotoxy (73, 17);
-					printf (">....");
+					printf (">...");
 
 				gotoxy (70, 15);
 				printf ("ENTER PASSWORD");
@@ -145,7 +144,7 @@ void login()
 				char rbc = 188;
 			char ltc = 201;
 		char lbc = 200;
-		
+		int check=0;
 			int t;
 				int ex = 55, ey =4;
 	while (1){
@@ -176,6 +175,12 @@ void login()
 	/// title		
 	gotoxy (70, 4);
 	printf ("Log In");
+					//pointer
+					gotoxy (73, 12);
+					printf (">...");
+					//second pointer
+					gotoxy (73, 17);
+					printf (">...");
 							
 											ex = 54, ey =5;
 												for (t=0;t<20;++t)
@@ -196,28 +201,33 @@ void login()
 													printf ("%c", down);
 												ey-=1;
 											}
-rec = sizeof (si);
-FILE *fp;
-	fp = fopen ("admin/admins.txt", "rb");
-		if (fp == NULL)
-		{
-				MessageBox (0, "Error 404", "Error", 0);		
-		}		
-		
-		while (fread(&si, rec, 1, fp)==1)
-		{
+//////file
+			
+			fflush (stdin);
 			gotoxy (70, 10);
 			printf ("Enter User Name");
-				gotoxy (70, 15);
+				gotoxy (73, 15);
 				printf ("Enter Password");
-			gotoxy (70, 12);
-			scanf ("%s", si.lo.username);
+			gotoxy (73, 12);
+			gets(lo.username);
 				gotoxy (70, 17);
-				scanf ("%s", si.lo.password);																		
-			
-			if (strcmp (si.lo.password, si.password_main)==0 && strcmp (si.lo.username, si.username_main)==0)
+				gets(lo.password);	
+		
+				
+FILE *fp;
+	fp = fopen ("admin/admins.txt", "rb");
+		while (fread(&si, sizeof (si), 1, fp)==1)
+		{													
+			if (strcmp (lo.password, si.password_main)==0 && strcmp (lo.username, si.username_main)==0)
 				{
-					gotoxy (70, 21);
+					check = 1;
+					break;
+			}
+		}		
+		
+		if (check == 1)
+		{
+				gotoxy (70, 21);
 						printf ("Please Wait ");
                         //Loop de loop varibales
    							 char z = 219;
@@ -241,8 +251,7 @@ FILE *fp;
 													gotoxy(0,0);
 													top_tier ();
 											}
-																										
-				}
+		}																							
 
 			else
 				{
@@ -260,8 +269,9 @@ FILE *fp;
                                     	}
 								gotoxy(70, 21);
 								printf ("Credentials don't match!!!!");
+								system ("cls");
 				} 
-	}
+	
 	fclose (fp);
 														
 					gotoxy(70, 22);

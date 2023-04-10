@@ -21,6 +21,8 @@ void form_gen ()
 					printf ("CANDIDATE INFORMATION");
 				gotoxy (60, 19);
 					printf ("RESULTS");
+				gotoxy (55, 35);
+					printf ("UPADATE DETAILS?");
 			int ex=31, ey=3;
 		for (e=0; e< 69; ++e)
 		{

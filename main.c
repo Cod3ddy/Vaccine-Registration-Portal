@@ -5,10 +5,12 @@
 #include <conio.h>
 #include <time.h>
 
-//Shadowy 
+
+//Shadowy
 //024 OP comrade of all times
 #define bar 219
-//a structure containing all the varibles for candidate input details
+//a structure containing all the variables for candidate input details
+//qwerty mans
 struct details
 {
 	char name [20], surname [20];
@@ -22,7 +24,7 @@ struct details
 		struct venue_time_date
 		{
 			char venue [20];
-			
+
 			struct doctor_lab_details
 				{
 					char FullName [30];
@@ -34,12 +36,11 @@ struct details
 					char time	  [10];
 					char lab	  [20];
 					char district [20];
-					
 				}l;
-			
+
 		}vtd;
 	}r;
-	
+
 }d;
 ///a replica for sizeof (); function
 long int store;
@@ -61,9 +62,6 @@ void gotoxy (int x, int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
-
-		
-
 //all my function are here
 void home_page ();
 void landing();
@@ -73,18 +71,21 @@ void menu ();
 void admin ();
 void logi ();
 void top_tier ();
+void user_modify();
 
 //tha header files
 #include "sign_login.h"
 #include "top_tier.h"
 #include "start.h"
 #include "form.h"
+#include "curtain.h"
 
 //tha main function
 int main ()
 
 {
-	 display ();
+	call_em ();
+	//display ();
 	//form_gen ();
 		//sign ();
 	//	topView ();
@@ -106,7 +107,7 @@ void home_page ()
 	gotoxy (55, 2);
 		printf ("Cybernesia 22  Vaccination Registration");
 	gotoxy (40, 3);
-		printf ("You have etaken a right step in coming here for vaccine registration");
+		printf ("You have taken a right step in coming here for vaccine registration");
 	gotoxy (49, 4);
 		printf ("*Please Fill In Your details in the Spaces Below*");
 	gotoxy (55, 5);
@@ -168,13 +169,13 @@ void details ()
 			char alphaCollection [] = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
 				int e;
 					int ex = 65, ey= 7;
-						
-						
+
+
 						system ("cls");
 							home_page ();
 					gotoxy (45, 7);
 							printf ("Your Reg Code is >> ");
-							
+
 					for (e=0; e < 6; ++ e)
 					{
 						d.code[e] = alphaCollection [rand () % strlen (alphaCollection)];
@@ -190,28 +191,28 @@ void details ()
 								gotoxy (62, 8);
 										fflush (stdin);
 									gets (code_check);
-									
+
 									if (strcmp (code_check, d.code)==0)
 									{
 											fwrite (&d, sizeof (d), 1, opi);
 											MessageBox(0,"SUBMITTED SUCCESSFULLY", "\tNOTIFICATION",0);
 												landing ();
-									}	
-									
+									}
+
 									if (strcmp (code_check, d.code)!=0)
 									{
 										MessageBox(0, "Code doesn't Match\nEnter Your Details Correctly", "ERROR",0);
 											landing ();
 									}
-										
+
 			}
 	fclose (opi);
 }
 void display(){
-	
-		char underScore = 95, GenCode [6];
+
+		char underScore = 95, GenCode [6], another [6];
 		int temp=1, check_var=0, uno, j;
-	
+
 		char s = 205;
 			char down = 186;
 				char rtc = 187;
@@ -220,7 +221,7 @@ void display(){
 		char lbc = 200;
 					gotoxy (30, 9);
 			printf ("*Enter Your Regestration Code Below To View Your CyberNesia Vaccine Form*");
-					
+
 							int fex = 53, fey=15;
 						for (j=0; j<25;++j)
 						{
@@ -239,15 +240,15 @@ void display(){
 								printf ("%c", ltc);
 							gotoxy (52, 18);
 								printf ("%c", lbc);
-							gotoxy (78, 15);	
+							gotoxy (78, 15);
 								printf ("%c", rtc);
 							gotoxy (78, 18);
 								printf ("%c", rbc);
-			
+
 					gotoxy (58, 16);
 						fflush (stdin);
 						gets (GenCode);
-		
+
 	FILE *cad;
 		cad = fopen ("candidate/candidates.txt", "rb");
 			while (fread(&d, sizeof(d),1,cad)==1)
@@ -262,7 +263,7 @@ void display(){
 			}
 			if (check_var==1)
 			{
-					system ("cls");	
+					system ("cls");
 					form_gen ();
 						gotoxy (32, 8);
 				printf ("NAME      : %s", d.name);
@@ -286,7 +287,7 @@ void display(){
 						gotoxy (70, 20);
 				printf ("C/SEX	   : %s", d.r.vtd.l.psex);
 						gotoxy (32, 22);
-				printf ("SIGNATURE : %s", d.r.vtd.l.psex);
+				printf ("SIGNATURE : %s", d.r.vtd.l.sign);
 						gotoxy (70, 22);
 				printf ("DATE 	   : %s", d.r.vtd.l.date);
 						gotoxy (32, 24);
@@ -296,21 +297,14 @@ void display(){
 						gotoxy (32, 26);
 				printf ("District  : %s", d.r.vtd.l.district);
 						gotoxy (70, 26);
-				printf ("V/STATUS     : %s", d.r.vtd.l.vstatus);
+				printf ("V/STATUS     : %.3s", d.r.vtd.l.vstatus);
 						gotoxy (45, 30);
 				printf ("V/RESULT  : %s", d.r.vtd.l.vresult);
 						gotoxy (56, 31);
 				printf ("________________");
 				
-				
-				
-				
-					gotoxy (101, 45);
-					getche ();
-						system ("cls");
-							menu ();
 			}
-			else 
+			else
 			{
 				MessageBox (0, "Match not Found Try Again", "Error", 0);
 					system ("cls");
@@ -318,15 +312,131 @@ void display(){
 			}
 
 		fclose (cad);
-}
-void overwrite()
-{
+				
+				gotoxy (45, 38);
+					printf ("[  yes ]");
+				gotoxy (75, 38);
+					printf ("[  no  ]");
+					gotoxy (65, 40);
+						gets (another);
+							
+							if (strcmp ("yes", another)==0 || strcmp ("YES", another)==0)
+							{
+									int count, ex = 60, ey = 42;
+							
+									for (count =0; count <1; count ++)
+											{	
+													gotoxy (ex, ey);
+												printf ("P");
+													ex+=1;
+														Sleep (100);
+													gotoxy (ex, ey);
+												printf ("l");
+													ex+=1;
+														Sleep (100);
+													gotoxy (ex, ey);
+												printf ("e");
+													ex+=1;
+														Sleep (100);
+													gotoxy (ex, ey);
+												printf ("a");
+													ex+=1;
+														Sleep (100);
+													gotoxy (ex, ey);
+												printf ("s");
+													ex+=1;
+														Sleep (100);
+													gotoxy (ex, ey);
+												printf ("e");
+													ex+=2;
+														Sleep (100);
+														gotoxy (ex, ey);
+												printf ("W");
+													ex+=1;
+														Sleep (100);
+													gotoxy (ex, ey);
+												printf ("a");
+													ex+=1;
+														Sleep (100);
+													gotoxy (ex, ey);
+												printf ("i");
+													ex+=1;
+														Sleep (100);
+													gotoxy (ex, ey);
+												printf ("t");
+													ex+=1;
+														Sleep (100);
+													gotoxy (ex, ey);
+												
+											}
+										getche ();
+									Sleep (500);
+										system ("cls");
+											user_modify ();
+											
+							}
+								
+					
+							if (strcmp ("no", another)==0 || strcmp ("NO", another)==0)
+							{
+									int count, ex = 60, ey = 42;
+							
+									for (count =0; count <1; count ++)
+											{	
+													gotoxy (ex, ey);
+												printf ("P");
+													ex+=1;
+														Sleep (100);
+													gotoxy (ex, ey);
+												printf ("l");
+													ex+=1;
+														Sleep (100);
+													gotoxy (ex, ey);
+												printf ("e");
+													ex+=1;
+														Sleep (100);
+													gotoxy (ex, ey);
+												printf ("a");
+													ex+=1;
+														Sleep (100);
+													gotoxy (ex, ey);
+												printf ("s");
+													ex+=1;
+														Sleep (100);
+													gotoxy (ex, ey);
+												printf ("e");
+													ex+=2;
+														Sleep (100);
+														gotoxy (ex, ey);
+												printf ("W");
+													ex+=1;
+														Sleep (100);
+													gotoxy (ex, ey);
+												printf ("a");
+													ex+=1;
+														Sleep (100);
+													gotoxy (ex, ey);
+												printf ("i");
+													ex+=1;
+														Sleep (100);
+													gotoxy (ex, ey);
+												printf ("t");
+													ex+=1;
+														Sleep (100);
+													gotoxy (ex, ey);
+												
+											}
+										getche ();
+									Sleep (500);
+										system ("cls");
+											menu ();
+							}
 }
 
 void landing ()
 {
 //ima change the bg color
-	system ("color 47");
+	system ("color 5f");
 	int val,val1,val2,val3;
 	char accept [10]	= "register";
 	char men  [10] 		= "menu";
@@ -372,8 +482,6 @@ void landing ()
 
 		gotoxy(3,2);
 		printf ("%c", ltc);
-
-
 				for (i=0; i<20; ++i)
 				{
 					gotoxy(j, k);
@@ -640,7 +748,7 @@ void landing ()
 }
 void menu ()
 {
-	system ("color 47");
+	system ("color 5f");
 		char s = 205;
 	char d = 186;
 		char rtc = 187;
@@ -880,16 +988,14 @@ void menu ()
 void top_tier ()
 
 {
-	
+
 	system ("color 47");
-    char *men [3] = {"1. view registered canditates", "2. delete a registered candidate", "3. Modify candidate record"};
+    char *men [4] = {"1. view registered canditates", "2. delete a registered candidate", "3. Modify candidate record", "4. Send Test Results"};
         int i;
             char select, ESC = 27;
                     int ex = 60,wy = 15;
-                  
-                    
                     	system ("cls");
-                         for (i=0;i<3;++i)
+                         for (i=0;i<4;++i)
                             {
                                 gotoxy(ex, wy);
                                 printf ("%s", men[i]);
@@ -900,7 +1006,7 @@ void top_tier ()
                             ex+=6;
                     gotoxy (ex, wy);
                         select = getche ();
-                        
+
 						if (select == ESC)
 				{
 					system ("cls");
@@ -923,6 +1029,11 @@ void top_tier ()
 							topModify ();
 							break;
 						}
+						case '4':{
+								system ("cls");
+							topLabMod ();
+							break;
+						}
 						default :{
 								system ("cls");
 						gotoxy(ex, wy);
@@ -932,7 +1043,7 @@ void top_tier ()
 							break;
 						}
 					}
-			
+
 }
 //////////*******************************////////
 void admin ()
@@ -941,12 +1052,157 @@ void admin ()
 		system ("cls");
 			landing ();
 }
-//////////////////////////////////////////////////
 
+//////////////////////////////////////////////////
 
 void logi ()
 {
 	login ();
 		top_tier ();
 }
-
+void user_modify ()
+{
+	int check_var=0, me;
+		char GenCode [6];
+		char s = 205;
+			char down = 186;
+				char rtc = 187;
+				char rbc = 188;
+			char ltc = 201;
+		char lbc = 200;
+	
+	store = sizeof (d);
+			
+					gotoxy (45, 9);
+			printf ("*Enter Candidate Registration Code Below*");
+					
+							int fex = 53, fey=15;
+						for (me=0; me<25;++me)
+						{
+								gotoxy (fex, fey);
+							printf ("%c", s);
+								fex+=1;
+						}
+							fex = 53, fey = 18;
+						for (me=0; me<25;++me)
+						{
+								gotoxy (fex, fey);
+							printf ("%c", s);
+								fex+=1;
+						}
+							gotoxy (52, 15);
+								printf ("%c", ltc);
+							gotoxy (52, 18);
+								printf ("%c", lbc);
+							gotoxy (78, 15);	
+								printf ("%c", rtc);
+							gotoxy (78, 18);
+								printf ("%c", rbc);
+							gotoxy (58, 16);
+							
+						fflush (stdin);
+						gets (GenCode);
+				
+				FILE *cad;
+					cad = fopen ("candidate/candidates.txt", "rb+");
+						
+						while (fread (&d, sizeof (d), 1, cad)==1)
+						{
+							if (strcmp (GenCode, d.code)==0)
+							{
+								system ("cls");
+								home_page ();
+								fflush (stdin);
+					gotoxy (60, 7);
+						printf ("Enter First Name");
+					gotoxy (62,8);
+						gets(d.name);
+							gotoxy (60, 10);
+								printf ("Enter Surname");
+							gotoxy (62, 11);
+								gets (d.surname);
+									gotoxy (60, 13);
+										printf ("Enter District");
+									gotoxy (62, 14);
+										gets (d.r.district);
+											gotoxy (60, 16);
+												printf ("Enter Venue");
+											gotoxy (62, 17);
+												gets (d.r.vtd.venue);
+													system ("cls");
+														home_page ();
+											gotoxy (60, 7);
+												printf ("Enter Area");
+											gotoxy (62, 8);
+												gets (d.r.area);
+									gotoxy (60, 10);
+										printf ("Enter Phone Number");
+									gotoxy (62, 11);
+										scanf ("%d", &d.phone);
+							gotoxy (60, 13);
+								printf ("Enter Age");
+							gotoxy (62, 14);
+								scanf ("%d", &d.r.age);
+								if (d.r.age <12)
+								{
+									system ("cls");
+										MessageBox (0,"Sorry Only 12 and Above can\nregister", "\tFailed to register", 0);
+											exit (0);
+								}
+	///////////////////GENERATION OF A SPECIAL CODE FOR ALL CANDIDATES/////////////////////////////////////
+		srand (time(NULL));
+			char alphaCollection [] = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
+				int e;
+					int ex = 65, ey= 7;
+						
+						
+						system ("cls");
+							home_page ();
+					gotoxy (45, 7);
+							printf ("Your Reg Code is >> ");
+							
+					for (e=0; e < 6; ++ e)
+					{
+						d.code[e] = alphaCollection [rand () % strlen (alphaCollection)];
+								gotoxy (ex, ey);
+							printf ("%c", d.code[e]);
+								Sleep (100);
+									ex+=1;
+					}
+						getche ();
+							system ("cls");
+								gotoxy (60, 7);
+									printf ("Enter Your Code Here");
+								gotoxy (62, 8);
+										fflush (stdin);
+									gets (GenCode);
+									
+									if (strcmp (GenCode, d.code)==0)
+									{
+											fseek(cad, -store, SEEK_CUR);
+											fwrite (&d, sizeof (d), 1, cad);
+											MessageBox(0,"SUBMITTED SUCCESSFULLY", "\tNOTIFICATION",0);
+													system ("cls");
+												menu ();
+									}	
+									
+									if (strcmp (GenCode, d.code)!=0)
+									{
+										MessageBox(0, "Code doesn't Match\nEnter Your Details Correctly", "ERROR",0);
+											system ("cls");
+												menu ();
+									}
+							
+									check_var = 1;
+									break;				
+						}
+						}
+									if (!check_var)
+									{
+										MessageBox (0, "Candidate not found\nTry Again", "ERROR",0);
+											system ("cls");
+												menu ();
+									}
+		fclose (cad);
+						}
+		
